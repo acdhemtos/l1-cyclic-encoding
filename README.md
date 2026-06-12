@@ -1,4 +1,4 @@
-# L1 Cyclical Encoding: A Linear-Derivative Alternative to Standard Trigonometric Embeddings
+# L1 Cyclical Encoding: A Constant-|Derivative| Alternative to Standard Trigonometric Embeddings
 
 Traditional cyclical feature engineering maps periodic inputs (such as time of day, day of the week, or wind direction) to a unit circle using standard trigonometric functions:
 
@@ -6,13 +6,19 @@ $$
 x_1 = \cos\left(2\pi t \right), \quad x_2 = \sin\left(2\pi t \right)
 $$
 
-While this preserves continuity across the boundary ($t=0 \equiv t=1$), it introduces a major artifact: **the rate of change of the derived features is non-linear**. Because the derivatives are themselves sinusoidal, the speed at which coordinates change varies across the domain, accelerating near the axes and decelerating near the diagonals. This often degrades the performance of linear systems and optimization surfaces, such as those in Neural Networks.
+While this preserves continuity across the boundary ($t=0 \equiv t=1$), it introduces a major artifact: **the rate of change of the derived features is not constant** w.r.t. input feature.
+
+![L2](L2.gif)
+
+Because the derivatives are themselves sinusoidal, the speed at which coordinates change varies across the domain, accelerating near the axes and decelerating near the diagonals. This often degrades the performance of linear systems and optimization surfaces, such as those in Neural Networks.
 
 This repository introduces **L1 Cyclical Encoding**, an alternative approach that maps periodic variables along a Manhattan-distance ($L_1$ norm) boundary:
 
 $$
 |x_1| + |x_2| = 1
 $$
+
+![L1](L1.gif)
 
 By executing a steady counter-clockwise walk around this diamond-shaped perimeter instead of an $L_2$ circle, **the rate of change remains perfectly constant and identical to the initial variable**. Furthermore, it completely eliminates the need for expensive floating-point trigonometric expansions (`sin` and `cos`), relying purely on simple arithmetic and modulo operations.
 

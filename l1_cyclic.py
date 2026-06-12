@@ -2,7 +2,7 @@ import warnings
 import numpy as np
 from typing import Union, Tuple
 
-def cyclic(
+def l1_cyclic(
 	num: Union[int, float, np.ndarray], 
 	*args: Union[int, float]
 ) -> Tuple[Union[float, np.ndarray], Union[float, np.ndarray]]:

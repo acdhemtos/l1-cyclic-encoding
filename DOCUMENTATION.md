@@ -26,16 +26,16 @@ your_project/
 Import the module directly from the cloned subdirectory:
 
 ```python
-from l1_cyclic_encoding.l1_cyclic import cyclic
+from l1_cyclic_encoding.l1_cyclic import l1_cyclic
 ```
 
 ## API Reference
 ```python
 # Format 1: Implicit minimum of 0.0 (Triggers a warning)
-x1, x2 = cyclic(num, max_val)
+x1, x2 = l1_cyclic(num, max_val)
 
 # Format 2: Explicit range
-x1, x2 = cyclic(num, min_val, max_val)
+x1, x2 = l1_cyclic(num, min_val, max_val)
 ```
 ### Parameters & Outputs
 - `num` : `int`, `float` or `np.ndarray` to be encoded.
@@ -46,28 +46,23 @@ x1, x2 = cyclic(num, min_val, max_val)
 
 ### 1. Scalar Baseline
 ```python
-from l1_cyclic_encoding.l1_cyclic import cyclic
-
-x1, x2 = cyclic(6, 24)
+x1, x2 = l1_cyclic(6, 24)
 print(f"Coordinates: ({x1}, {x2})")
 # Output: (0.0, 1.0)
 ```
 
 ### 2. Explicit Range
 ```python
-from l1_cyclic_encoding.l1_cyclic import cyclic
-
-x1, x2 = cyclic(-90, -180, 180)
+x1, x2 = l1_cyclic(-90, -180, 180)
 print(f"Coordinates: ({x1}, {x2})")
 # Output: (0.0, -1.0)
 ```
 ### 3. Vectorized NumPy Column
 ```python
 import numpy as np
-from l1_cyclic_encoding.l1_cyclic import cyclic
 
 hours = np.array([0, 6, 12, 18])
-x1_arr, x2_arr = cyclic(hours, 24)
+x1_arr, x2_arr = l1_cyclic(hours, 24)
 ```
 
 ## Error Handling
